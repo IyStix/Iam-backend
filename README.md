@@ -15,7 +15,6 @@ Permet :
 
 - Python 3.10+ (idéalement via [pyenv](https://github.com/pyenv/pyenv))
 - Git (pour cloner le repo)
-- `make` (optionnel mais utile)
 
 ---
 
