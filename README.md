@@ -31,3 +31,10 @@ source iam-env/bin/activate
 
 # 3. Installe les dépendances
 pip install -r requirements.txt
+
+# 4. Lancer le backend
+uvicorn app.main:app --reload
+
+# 5. Run testsuite
+cd "racine du projet"
+pytest
