@@ -30,11 +30,14 @@ python3 -m venv iam-env
 source iam-env/bin/activate
 
 # 3. Installe les dépendances
+cd app
 pip install -r requirements.txt
 
 # 4. Lancer le backend
+cd ..
 uvicorn app.main:app --reload
 
 # 5. Run testsuite
 cd "racine du projet"
+export PYTHONPATH=.
 pytest
