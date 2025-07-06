@@ -1,43 +1,34 @@
 # 🔐 IAM Backend – EPITA
 
-Backend du projet **Identity & Access Management** développé dans le cadre du projet EPITA.
+Projet complet de gestion des identités (IAM) avec :
+- Authentification via LDAP
+- JWT + OAuth2
+- RBAC avec rôles et permissions
+- API FastAPI + Swagger
+- PostgreSQL
+- Dockerisé et prêt pour CI
 
-Permet :
-- Authentification avec JWT
-- Gestion des utilisateurs (simulée)
-- Gestion des rôles (simulée)
-- Intégration future LDAP/AD et RBAC
-- API documentée avec Swagger
-
----
-
-## ⚙️ Prérequis
-
-- Python 3.10+ (idéalement via [pyenv](https://github.com/pyenv/pyenv))
-- Git (pour cloner le repo)
-
----
-
-## 🧪 Installation locale (Mac/Linux)
+## Installation
 
 ```bash
-# 1. Clone le projet
-git clone https://github.com/ton-user/iam-backend.git
+git clone <repo>
 cd iam-backend
+make setup
+make run
+```
 
-# 2. Crée un environnement virtuel
-python3 -m venv iam-env
-source iam-env/bin/activate
+## Routes
 
-# 3. Installe les dépendances
-cd app
-pip install -r requirements.txt
+- POST /auth/login
+- GET /users/
+- CRUD /roles, /permissions
 
-# 4. Lancer le backend
-cd ..
-uvicorn app.main:app --reload
+## Test
 
-# 5. Run testsuite
-cd "racine du projet"
-export PYTHONPATH=.
-pytest
+```bash
+make test
+```
+
+## Docs
+
+Swagger: http://localhost:8000/docs

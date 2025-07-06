@@ -1,27 +1,19 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, Depends, HTTPException, status, Form
 from fastapi.security import OAuth2PasswordRequestForm
-from app.core.security import create_access_token
 from datetime import timedelta
+from app.core.security import SECRET_KEY, ALGORITHM, oauth2_scheme
+from app.core.ldap import ldap_authenticate
+from jose import jwt
 
 router = APIRouter()
 
-# Faux utilisateur LDAP simulé
-fake_users = {
-    "abdel": {
-        "username": "abdel",
-        "password": "test123",  # En prod => hashé !
-        "roles": ["admin"]
-    }
-}
-
 @router.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = fake_users.get(form_data.username)
-    if not user or user["password"] != form_data.password:
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-
-    access_token = create_access_token(
-        data={"sub": user["username"], "roles": user["roles"]},
-        expires_delta=timedelta(minutes=60)
-    )
+    if not ldap_authenticate(form_data.username, form_data.password):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+    access_token = jwt.encode({
+        "sub": form_data.username,
+        "roles": ["admin"],  # Temporaire. À extraire dynamiquement depuis LDAP si besoin
+        "exp": timedelta(minutes=60).total_seconds()
+    }, SECRET_KEY, algorithm=ALGORITHM)
     return {"access_token": access_token, "token_type": "bearer"}

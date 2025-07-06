@@ -2,5 +2,7 @@ fastapi
 uvicorn
 python-jose[cryptography]
 python-multipart
+ldap3
+sqlmodel
+psycopg2-binary
 pytest
-httpx
