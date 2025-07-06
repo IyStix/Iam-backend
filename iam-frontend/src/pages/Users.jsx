@@ -1,21 +1,27 @@
-
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from "react";
+import { getUsers } from "../api/api";  // adapte le chemin si besoin
 
 export default function Users() {
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/users').then(res => {
-      setUsers(res.data)
-    }).catch(() => {
-      setUsers([])
-    })
-  }, [])
+    getUsers()
+      .then((res) => {
+        setUsers(res.data);
+        setError(null);
+      })
+      .catch((err) => {
+        console.error("Error fetching users:", err);
+        setError("Impossible de récupérer les utilisateurs");
+        setUsers([]);
+      });
+  }, []);
 
   return (
     <div>
       <h1 className="text-xl font-semibold mb-4">Users</h1>
+      {error && <p className="text-red-600 mb-2">{error}</p>}
       <table className="min-w-full border">
         <thead>
           <tr>
@@ -26,9 +32,13 @@ export default function Users() {
         </thead>
         <tbody>
           {users.length === 0 ? (
-            <tr><td className="border px-2 py-1" colSpan="3">No users found</td></tr>
+            <tr>
+              <td className="border px-2 py-1" colSpan={3}>
+                No users found
+              </td>
+            </tr>
           ) : (
-            users.map(user => (
+            users.map((user) => (
               <tr key={user.id}>
                 <td className="border px-2 py-1">{user.id}</td>
                 <td className="border px-2 py-1">{user.username}</td>
@@ -39,5 +49,5 @@ export default function Users() {
         </tbody>
       </table>
     </div>
-  )
+  );
 }

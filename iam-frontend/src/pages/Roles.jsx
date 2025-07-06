@@ -20,8 +20,11 @@ export default function Roles() {
         <thead>
           <tr>
             <th className="border px-2 py-1">ID</th>
-            <th className="border px-2 py-1">Username</th>
-            <th className="border px-2 py-1">Email</th>
+            <th className="border px-2 py-1">Roles</th>
+            <th className="border px-2 py-1">description</th>
+            <th className="border px-2 py-1">users</th>
+            <th className="border px-2 py-1">permissions</th>
+
           </tr>
         </thead>
         <tbody>
@@ -31,8 +34,10 @@ export default function Roles() {
             roles.map(role => (
               <tr key={role.id}>
                 <td className="border px-2 py-1">{role.id}</td>
-                <td className="border px-2 py-1">{role.rolename}</td>
-                <td className="border px-2 py-1">{role.email}</td>
+                <td className="border px-2 py-1">{role.name}</td>
+                <td className="border px-2 py-1">{role.description}</td>
+                <td className="border px-2 py-1">{role.users}</td>
+                <td className="border px-2 py-1">{role.permissions}</td>
               </tr>
             ))
           )}
