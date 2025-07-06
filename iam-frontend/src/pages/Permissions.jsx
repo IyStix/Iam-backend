@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getPermissions } from "../api/api"; // adapte le chemin
+import Sidebar from "../composant/sidebar";
 
 export default function Permissions() {
   const [permissions, setPermissions] = useState([]);
@@ -16,6 +17,7 @@ export default function Permissions() {
 
   return (
     <div>
+      <Sidebar />
       <h1 className="text-xl font-semibold mb-4">Permissions</h1>
       <table className="min-w-full border">
         <thead>

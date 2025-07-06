@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getRoles } from "../api/api";  // adapte le chemin si besoin
+import Sidebar from "../composant/sidebar";
 
 export default function Roles() {
   const [roles, setRoles] = useState([]);
@@ -16,6 +17,7 @@ export default function Roles() {
 
   return (
     <div>
+      <Sidebar />
       <h1 className="text-xl font-semibold mb-4">Roles</h1>
       <table className="min-w-full border">
         <thead>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getUsers, addUser } from "../api/api"; // addUser à créer côté API
+import Sidebar from "../composant/sidebar";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -46,7 +47,8 @@ export default function Users() {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold mb-4">Users</h1>
+      <Sidebar />
+      <h1 className="text-xl font-semibold mb-4">Liste des utilisateurs</h1>
       <table className="min-w-full border">
         <thead>
           <tr>
