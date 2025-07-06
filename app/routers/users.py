@@ -5,12 +5,14 @@ from app.schemas.user_schema import UserCreate, UserRead
 from app.models.user import User
 from app.services import user_service
 from app.core.audit import log_action
+from typing import List
 
 router = APIRouter()
 
-@router.get("/", response_model=list[UserRead])
+@router.get("/", response_model=List[UserRead])
 def list_users(session: Session = Depends(get_session)):
-    return user_service.get_users(session)
+    users = user_service.get_users(session)
+    return [UserRead.from_orm(u) for u in users]
 
 @router.post("/", response_model=UserRead)
 def create_user(user: UserCreate, session: Session = Depends(get_session)):

@@ -7,7 +7,11 @@ from app.models.user import User
 
 
 def get_users(session: Session):
-    return session.exec(select(User)).all()
+    from sqlalchemy import select
+    stmt = select(User)
+    result = session.execute(stmt)
+    return result.scalars().all()
+
 
 def get_user(session: Session, user_id: int):
     return session.get(User, user_id)
