@@ -32,8 +32,7 @@ export default function Users() {
   const handleAddUser = async (e) => {
     e.preventDefault();
     try {
-      await addUser({ username, email, hashed_password });  // tu peux adapter selon ton API
-      alert("Utilisateur ajouté avec succès");
+      await addUser({ username, email, hashed_password });
       setShowForm(false);
       setUsername("");
       setEmail("");
@@ -41,7 +40,6 @@ export default function Users() {
       fetchUsers();  // rafraîchir la liste
     } catch (err) {
       console.error("Erreur ajout utilisateur", err);
-      alert("Erreur lors de l'ajout de l'utilisateur");
     }
   };
 
