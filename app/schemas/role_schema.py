@@ -7,3 +7,6 @@ class RoleCreate(SQLModel):
 class RoleRead(SQLModel):
     id: int
     name: str
+
+class RoleUpdate(SQLModel):
+    name: Optional[str] = None

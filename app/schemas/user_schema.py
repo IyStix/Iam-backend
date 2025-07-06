@@ -10,3 +10,8 @@ class UserRead(SQLModel):
     id: int
     username: str
     email: str
+
+class UserUpdate(SQLModel):
+    username: Optional[str]
+    email: Optional[str]
+    hashed_password: Optional[str]

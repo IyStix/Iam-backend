@@ -15,3 +15,11 @@ def list_permissions(session: Session = Depends(get_session)):
 def create_permission(permission: PermissionCreate, session: Session = Depends(get_session)):
     db_permission = Permission.from_orm(permission)
     return permission_service.create_permission(session, db_permission)
+
+@router.put("/{permission_id}", response_model=PermissionRead)
+def update_permission(permission_id: int, permission: PermissionCreate, session: Session = Depends(get_session)):
+    return permission_service.update_permission(session, permission_id, permission)
+
+@router.delete("/{permission_id}")
+def delete_permission(permission_id: int, session: Session = Depends(get_session)):
+    return permission_service.delete_permission(session, permission_id)

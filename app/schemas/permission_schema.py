@@ -9,3 +9,6 @@ class PermissionRead(SQLModel):
     id: int
     name: str
     description: Optional[str]
+
+class PermissionUpdate(SQLModel):
+    name: Optional[str] = None
