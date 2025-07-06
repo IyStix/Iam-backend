@@ -1,6 +1,9 @@
 from sqlmodel import Session, select
 from app.models.user import User
 from app.schemas.user_schema import UserUpdate
+from sqlalchemy import select
+from app.models.user import User
+from app.models.user import User
 
 
 def get_users(session: Session):
@@ -36,3 +39,8 @@ def update_user(session: Session, user_id: int, user_update: UserUpdate) -> User
     session.commit()
     session.refresh(user)
     return user
+
+def get_user_by_username(db, username: str):
+    stmt = select(User).where(User.username == username)
+    result = db.execute(stmt)
+    return result.scalars().first()
